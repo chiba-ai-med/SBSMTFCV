@@ -1,0 +1,19 @@
+name: Docker Pull/Run (ghcr.io/chiba-ai-med/sbsmtfcv)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+    ghcr-pull-job:
+        name: run docker pull from ghcr.io job
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: docker pull
+              run: |
+                  echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u kokitsuyuzaki --password-stdin && docker pull ghcr.io/chiba-ai-med/sbsmtfcv:main

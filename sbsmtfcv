@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# Help page
+showHelp() {
+    cat << EOF
+Usage: ./sbsmtf -i <input-file> -o <output-directory> [--cores/--rank_min/--rank_max/--lambda_min/--lambda_max/--trials/--n_iter_max/--ratio/--memgb/-h/-v]
+Cross validation workflow of Semi-Binary Symmetric Matrix Tri-Factorization (SBSMTF)
+
+    -i, -input,         --input                 Input file (e.g., data/testdata.tsv, mandatory)
+
+    -o, -outdir,        --outdir                Output directory (e.g., output, mandatory)
+
+    -c, -cores,         --cores                 Number of cores to use Snakemake (Default value is 10, optional)
+
+    -l, -rank_min,          --rank_min                  Lower limit of rank parameter to search (Default value is 2, which is used for the rank parameter J of dNMF, mandatory)
+
+    -u, -rank_max,          --rank_max                  Upper limit of rank parameter to search (Default value is 10, which is used for the rank parameter J of dNMF, mandatory)
+
+    -b, -lambda_min,          --lambda_min                  Lower limit of lambda parameter to search (Default value is -10, which means 10^-10 is used for the binary regularization parameter Bin_U of dNMF, mandatory)
+
+    -d, -lambda_max,          --lambda_max                  Upper limit of lambda parameter to search (Default value is 10, which means 10^10 is used for the binary regularization parameter Bin_U of dNMF, mandatory)
+
+    -t, -trials,        --trials                Number of random trials (Default value is 10, optional)
+
+    -e, -n_iter_max,         --n_iter_max                 Number of iterations (Default value is 100, optional)
+
+    -a, -ratio,         --ratio                 Sampling ratio of cross validation (0 - 100, Default value is 20, optional)
+
+    -m, -memgb,         --memgb                 Memory usage (GB, Default value is 10, optional)
+
+    -h, -help,          --help                  Display help
+
+    -v, -version,       --version               Version of this workflow
+
+EOF
+}
+
+# Default Values
+INPUT=""
+OUTDIR=""
+CORES=10
+RANK_MIN=2
+RANK_MAX=10
+LAMBDA_MIN=-10
+LAMBDA_MAX=10
+TRIALS=10
+N_ITER_MAX=100
+RATIO=20
+MEMGB=10
+VERSION="v1.0.0"
+
+# Command Argument Parsing
+while getopts i:o:c:l:u:b:d:t:e:a:m:h-:v- opt; do
+    optarg="$OPTARG"
+    [[ "$opt" = - ]] &&
+        opt="-${OPTARG%%=*}" &&
+        optarg="${OPTARG/${OPTARG%%=*}/}" &&
+        optarg="${optarg#=}"
+    case "-$opt" in
+        -i|--input)
+            INPUT="$optarg"
+            ;;
+        -o|--outdir)
+            OUTDIR="$optarg"
+            ;;
+        -c|--cores)
+            CORES="$optarg"
+            ;;
+        -l|--rank_min)
+            RANK_MIN="$optarg"
+            ;;
+        -u|--rank_max)
+            RANK_MAX="$optarg"
+            ;;
+        -b|--lambda_min)
+            LAMBDA_MIN="$optarg"
+            ;;
+        -d|--lambda_max)
+            LAMBDA_MAX="$optarg"
+            ;;
+        -t|--trials)
+            TRIALS="$optarg"
+            ;;
+        -e|--n_iter_max)
+            N_ITER_MAX="$optarg"
+            ;;
+        -a|--ratio)
+            RATIO="$optarg"
+            ;;
+        -m|--memgb)
+            MEMGB="$optarg"
+            ;;
+        -h|--help)
+            showHelp
+            exit 0
+            ;;
+        -v|--version)
+            echo $VERSION
+            exit 0
+            ;;
+        \?)
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+# Perform Snakemake Workflow
+snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR \
+rank_min=$RANK_MIN rank_max=$RANK_MAX \
+lambda_min=$LAMBDA_MIN lambda_max=$LAMBDA_MAX trials=$TRIALS \
+n_iter_max=$N_ITER_MAX ratio=$RATIO --resources mem_gb=$MEMGB

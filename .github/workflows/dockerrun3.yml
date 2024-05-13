@@ -1,0 +1,19 @@
+name: Docker Pull/Run (koki/sbsmtfcv)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+    dockerhub-pull-job:
+        name: run docker pull from DockerHub job
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v3
+            - name: docker pull
+              run: |
+                  docker pull koki/sbsmtfcv:main
