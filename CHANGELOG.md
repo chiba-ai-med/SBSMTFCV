@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.0.0...v1.0.1) (2024-05-13)
+
+
+### Bug Fixes
+
+* sym option ([5304d3c](https://github.com/chiba-ai-med/SBSMTFCV/commit/5304d3cc2779b51dc11ec0080e00267f773df12c))
+
 ## 1.0.0 (2024-05-13)
 
 
