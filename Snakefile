@@ -24,7 +24,7 @@ N_ITER_MAX = int(config["n_iter_max"])
 RATIO = int(config["ratio"])
 
 # Docker Container
-container: 'docker://koki/sbsmtf_component:20240513'
+container: 'docker://koki/sbsmtfcv_component:20240513'
 
 # All Rules
 rule all:

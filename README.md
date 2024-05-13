@@ -1,7 +1,7 @@
 # SBSMTFCV
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥7.30.1-brightgreen.svg)](https://snakemake.github.io)
-[![DOI](https://zenodo.org/badge/???.svg)](https://zenodo.org/badge/latestdoi//???.)
+[![DOI](https://zenodo.org/badge/659959126.svg)](https://zenodo.org/doi/10.5281/zenodo.8189643)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/build_test_push.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/dockerrun1.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/dockerrun2.yml/badge.svg)

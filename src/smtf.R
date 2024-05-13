@@ -10,10 +10,11 @@ ratio <- as.numeric(args[6])
 
 # Loading
 A <- as.matrix(read.table(infile, header=FALSE))
+colnames(A) <- NULL
 
 # Mask Matrix
 M <- kFoldMaskTensor(A, k=round(100/ratio),
-	seeds=rbinom(1, 1E+5, 0.5))[[1]]
+	seeds=rbinom(1, 1E+5, 0.5), sym=TRUE)[[1]]
 
 # NMF without binary regularization
 out <- SMTF(A=A, M=M, J=J, num.iter=num.iter)
