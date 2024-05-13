@@ -9,7 +9,7 @@
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/unittest1.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/unittest2.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/release-please.yml/badge.svg)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchiba-ai-med%2FSBSMTFCV.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchiba-ai-med%2FSBSMTFCV?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchiba-ai-med%2FSBSMTFCV.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchiba-ai-med%2FSBSMTFCV?ref=badge_shield&issueType=license)
 
 Cross validation workflow of Semi-Binary Symmetric Matrix Tri-Factorization (SBSMTF)
 
