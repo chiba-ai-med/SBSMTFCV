@@ -120,6 +120,16 @@ docker run --rm -v $(pwd):/work ghcr.io/chiba-ai-med/sbsmtfcv:main \
 --n_iter_max=100 --ratio=20 --memgb=10
 ```
 
+## For Snakemake >=8 users
+`--cluster CMD` option was removed from Snakemake v8.
+Use `--executor cluster-generic --cluster-generic-submit-cmd CMD` instead.
+To use this new feature, you have to install `snakemake-executor-plugin-cluster-generic` in advance.
+
+cf.
+
+https://stackoverflow.com/questions/77929511/how-to-run-snakemake-8-on-a-slurm-cluster
+https://snakemake.readthedocs.io/en/latest/getting_started/migration.html#migrating-to-snakemake-8
+
 # Reference
 - [dcTensor](https://cran.r-project.org/web/packages/dcTensor/index.html)
 
