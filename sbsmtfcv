@@ -50,7 +50,7 @@ N_ITER_MAX=100
 BETA=2
 RATIO=20
 MEMGB=10
-VERSION="v1.1.0"
+VERSION="v1.1.1"
 
 # Command Argument Parsing
 while getopts i:o:c:l:u:b:d:t:e:p:a:m:h-:v- opt; do
