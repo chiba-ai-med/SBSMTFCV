@@ -3,7 +3,7 @@ library("nnTensor")
 library("tidyverse")
 
 # Symmetric Matrix Tri-Factorization
-SMTF <- function(A, M=NULL, J, num.iter, Bin_U=0){
+SMTF <- function(A, M=NULL, J, num.iter, Bin_U=0, Beta=2){
 	U <- matrix(runif(nrow(A)*J), nrow=nrow(A), ncol=J)
 	S <- matrix(runif(J*J), nrow=J, ncol=J)
 	S <- S %*% t(S)
@@ -14,20 +14,20 @@ SMTF <- function(A, M=NULL, J, num.iter, Bin_U=0){
 		if(is.null(M)){
 			# Update U
 			out <- dNMTF(A, initU=U, initV=U, initS=S,
-				fixS=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U)
+				fixS=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U, Beta=Beta)
 			U <- out$U
 			# Update S
 			out <- dNMTF(A, initU=U, initV=U, initS=S,
-				fixU=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U)
+				fixU=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U, Beta=Beta)
 			S <- out$S
 		}else{
 			# Update U
 			out <- dNMTF(A, M=M, initU=U, initV=U, initS=S,
-				fixS=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U)
+				fixS=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U, Beta=Beta)
 			U <- out$U
 			# Update S
 			out <- dNMTF(A, M=M, initU=U, initV=U, initS=S,
-				fixU=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U)
+				fixU=TRUE, fixV=TRUE, rank=c(J,J), num.iter=1, Bin_U=Bin_U, Beta=Beta)
 			S <- out$S
 		}
 		# Log

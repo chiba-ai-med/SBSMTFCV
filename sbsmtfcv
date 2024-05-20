@@ -3,7 +3,7 @@
 # Help page
 showHelp() {
     cat << EOF
-Usage: ./sbsmtf -i <input-file> -o <output-directory> [--cores/--rank_min/--rank_max/--lambda_min/--lambda_max/--trials/--n_iter_max/--ratio/--memgb/-h/-v]
+Usage: ./sbsmtf -i <input-file> -o <output-directory> [--cores/--rank_min/--rank_max/--lambda_min/--lambda_max/--trials/--n_iter_max/--beta/--ratio/--memgb/-h/-v]
 Cross validation workflow of Semi-Binary Symmetric Matrix Tri-Factorization (SBSMTF)
 
     -i, -input,         --input                 Input file (e.g., data/testdata.tsv, mandatory)
