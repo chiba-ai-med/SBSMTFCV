@@ -12,17 +12,19 @@ Cross validation workflow of Semi-Binary Symmetric Matrix Tri-Factorization (SBS
 
     -c, -cores,         --cores                 Number of cores to use Snakemake (Default value is 10, optional)
 
-    -l, -rank_min,          --rank_min                  Lower limit of rank parameter to search (Default value is 2, which is used for the rank parameter J of dNMF, mandatory)
+    -l, -rank_min,      --rank_min              Lower limit of rank parameter to search (Default value is 2, which is used for the rank parameter J of dNMF, mandatory)
 
-    -u, -rank_max,          --rank_max                  Upper limit of rank parameter to search (Default value is 10, which is used for the rank parameter J of dNMF, mandatory)
+    -u, -rank_max,      --rank_max              Upper limit of rank parameter to search (Default value is 10, which is used for the rank parameter J of dNMF, mandatory)
 
-    -b, -lambda_min,          --lambda_min                  Lower limit of lambda parameter to search (Default value is -10, which means 10^-10 is used for the binary regularization parameter Bin_U of dNMF, mandatory)
+    -b, -lambda_min,    --lambda_min            Lower limit of lambda parameter to search (Default value is -10, which means 10^-10 is used for the binary regularization parameter Bin_U of dNMF, mandatory)
 
-    -d, -lambda_max,          --lambda_max                  Upper limit of lambda parameter to search (Default value is 10, which means 10^10 is used for the binary regularization parameter Bin_U of dNMF, mandatory)
+    -d, -lambda_max,    --lambda_max            Upper limit of lambda parameter to search (Default value is 10, which means 10^10 is used for the binary regularization parameter Bin_U of dNMF, mandatory)
 
     -t, -trials,        --trials                Number of random trials (Default value is 10, optional)
 
-    -e, -n_iter_max,         --n_iter_max                 Number of iterations (Default value is 100, optional)
+    -e, -n_iter_max,    --n_iter_max            Number of iterations (Default value is 100, optional)
+
+    -p, -beta,          --beta                  Parameter for Beta-divergence (Default value is 2, optional)
 
     -a, -ratio,         --ratio                 Sampling ratio of cross validation (0 - 100, Default value is 20, optional)
 
@@ -45,12 +47,13 @@ LAMBDA_MIN=-10
 LAMBDA_MAX=10
 TRIALS=10
 N_ITER_MAX=100
+BETA=2
 RATIO=20
 MEMGB=10
-VERSION="v1.0.1"
+VERSION="v1.1.0"
 
 # Command Argument Parsing
-while getopts i:o:c:l:u:b:d:t:e:a:m:h-:v- opt; do
+while getopts i:o:c:l:u:b:d:t:e:p:a:m:h-:v- opt; do
     optarg="$OPTARG"
     [[ "$opt" = - ]] &&
         opt="-${OPTARG%%=*}" &&
@@ -84,6 +87,9 @@ while getopts i:o:c:l:u:b:d:t:e:a:m:h-:v- opt; do
         -e|--n_iter_max)
             N_ITER_MAX="$optarg"
             ;;
+        -p|--beta)
+            BETA="$optarg"
+            ;;
         -a|--ratio)
             RATIO="$optarg"
             ;;
@@ -109,4 +115,4 @@ shift $((OPTIND - 1))
 snakemake -j $CORES --config input=$INPUT outdir=$OUTDIR \
 rank_min=$RANK_MIN rank_max=$RANK_MAX \
 lambda_min=$LAMBDA_MIN lambda_max=$LAMBDA_MAX trials=$TRIALS \
-n_iter_max=$N_ITER_MAX ratio=$RATIO --resources mem_gb=$MEMGB
+n_iter_max=$N_ITER_MAX beta=$BETA ratio=$RATIO --resources mem_gb=$MEMGB
