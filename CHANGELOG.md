@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.0.1...v1.1.0) (2024-05-20)
+
+
+### Features
+
+* beta parameter ([8d23c99](https://github.com/chiba-ai-med/SBSMTFCV/commit/8d23c99e863e31dcceced3fbec2740e5f607f6b4))
+
 ## [1.0.1](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.0.0...v1.0.1) (2024-05-13)
 
 
