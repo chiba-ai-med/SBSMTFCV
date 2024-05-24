@@ -31,7 +31,7 @@ else:
 BIN_H = str(config["bin_h"])
 BIN_W_NEW = str(config["bin_w_new"])
 if BIN_W_NEW == "TRUE" and X_NEW_LIST == "None":
-	raise ValueError("If bin_w_new=True is specified, x_new_list must also be specified!!!")
+	raise ValueError("If bin_w_new=TRUE is specified, x_new_list must also be specified!!!")
 
 BETA = int(config["beta"])
 RATIO = int(config["ratio"])
