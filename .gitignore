@@ -48,3 +48,4 @@ report
 logs
 benchmarks
 .conda
+beta*

@@ -6,9 +6,9 @@ lambda_max <- as.numeric(args[2])
 trials <- as.numeric(args[3])
 outdir <- args[4]
 outfile <- args[5]
-bin_h <- as.logical(args[6])
+bin_w <- as.logical(args[6])
 
-if(bin_h){
+if(bin_w){
 	# Setting
 	lambda_index = lambda_min:lambda_max
 	trial_index = seq_len(trials)
@@ -18,7 +18,7 @@ if(bin_h){
 	count <- 1
 	for(i in seq_along(lambda_index)){
 		for(j in trial_index){
-			filename = paste0(outdir, "/sbsmtf/", lambda_index[i], "/", j, "_error.txt")
+			filename = paste0(outdir, "/sbmf/", lambda_index[i], "/", j, "_error.txt")
 			out[count, 3] <- read.table(filename)
 			count <- count + 1
 		}

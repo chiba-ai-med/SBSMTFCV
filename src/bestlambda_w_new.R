@@ -1,13 +1,15 @@
 source("src/Functions.R")
 
 args <- commandArgs(trailingOnly = TRUE)
-infile <- args[1]
-outfile <- args[2]
-bin_h <- as.logical(args[3])
+infile1 <- args[1]
+infile2 <- args[2]
+outfile <- args[3]
+bin_h <- as.logical(args[4])
+bin_w <- as.logical(args[5])
 
-if(bin_h){
+if(bin_w){
 	# Loading
-	out <- read.table(infile, header=FALSE)
+	out <- read.table(infile1, header=FALSE)
 	colnames(out) <- c("trial", "lambda", "value")
 
 	# Best lambda
@@ -24,5 +26,9 @@ if(bin_h){
 	# Save
 	write.table(10^as.numeric(best_lambda), outfile, row.names=FALSE, col.names=FALSE, quote=FALSE)
 }else{
-	write.table(1E-10, outfile, row.names=FALSE, col.names=FALSE, quote=FALSE)
+	if(bin_h){
+		file.copy(infile2, outfile, overwrite = TRUE)
+	}else{
+		write.table(1E-10, outfile, row.names=FALSE, col.names=FALSE, quote=FALSE)
+	}
 }
