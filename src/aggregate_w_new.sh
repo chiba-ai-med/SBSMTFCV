@@ -12,7 +12,13 @@ SLURM_RESTART_COUNT=2
 
 args=("$@")
 len=${#args[@]}
-INFILES=("${args[@]:0:len-1}")
-OUTFILE=("${args[len-1]}")
+INFILES=("${args[@]:0:len-2}")
+OUTFILE=("${args[len-2]}")
 
-cat ${INFILES[@]} > $OUTFILE
+if [ ${args[len-1]} = TRUE ]; then
+	# Sparse
+	Rscript src/aggregate_w_new.R ${INFILES[@]} $OUTFILE
+else
+	# Dense
+	cat ${INFILES[@]} > $OUTFILE
+fi

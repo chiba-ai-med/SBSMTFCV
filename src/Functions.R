@@ -1,6 +1,7 @@
 library("dcTensor")
 library("nnTensor")
 library("tidyverse")
+library("Matrix")
 
 # Symmetric Matrix Tri-Factorization
 SMTF <- function(A, M=NULL, J, num.iter, Bin_U=0, Beta=2){

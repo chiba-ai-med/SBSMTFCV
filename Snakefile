@@ -28,16 +28,17 @@ if X_NEW_LIST == "None":
 else:
 	X_NEWS = pd.read_table(X_NEW_LIST, header=None)[0]
 
+INPUT_SPARSE = str(config["input_sparse"])
+OUTPUT_SPARSE = str(config["output_sparse"])
+X_NEW_SPARSE = str(config["x_new_sparse"])
+W_NEW_SPARSE = str(config["w_new_sparse"])
 BIN_H = str(config["bin_h"])
 BIN_W_NEW = str(config["bin_w_new"])
-if BIN_W_NEW == "TRUE" and X_NEW_LIST == "None":
-	raise ValueError("If bin_w_new=TRUE is specified, x_new_list must also be specified!!!")
-
 BETA = int(config["beta"])
 RATIO = int(config["ratio"])
 
 # Docker Container
-container: 'docker://koki/sbsmtfcv_component:20240513'
+container: 'docker://koki/sbsmtfcv_component:20240604'
 
 # All Rules
 rule all:
@@ -49,7 +50,7 @@ rule all:
 		OUTDIR + '/BIN_DATA.tsv',
 		OUTDIR + '/plot/zero_one_percentage_w_new.png',
 		OUTDIR + '/sbmf/bestlambda.txt',
-		OUTDIR + '/W_new.tsv'
+		OUTDIR + '/W_new'
 
 #############################################################
 # Non-negative Check
@@ -64,7 +65,7 @@ rule check_input:
 	log:
 		OUTDIR + '/logs/check_input.log'
 	shell:
-		'src/check_input.sh {input} {output} >& {log}'
+		'src/check_input.sh {input} {output} {INPUT_SPARSE} >& {log}'
 
 #############################################################
 # Rank Estimation
@@ -81,7 +82,7 @@ rule smtf:
 	log:
 		OUTDIR + '/logs/smtf_{rank}_{t}.log'
 	shell:
-		'src/smtf.sh {input.in1} {output} {wildcards.rank} {N_ITER_MAX} {BETA} {RATIO} >& {log}'
+		'src/smtf.sh {input.in1} {output} {wildcards.rank} {N_ITER_MAX} {BETA} {RATIO} {INPUT_SPARSE} >& {log}'
 
 rule aggregate_smtf:
 	input:
@@ -135,7 +136,7 @@ rule sbsmtf:
 	log:
 		OUTDIR + '/logs/sbsmtf_{l}_{t}.log'
 	shell:
-		'src/sbsmtf.sh {input} {output} {wildcards.l} {N_ITER_MAX} {BIN_H} {BETA} >& {log}'
+		'src/sbsmtf.sh {input} {output} {wildcards.l} {N_ITER_MAX} {BIN_H} {BETA} {INPUT_SPARSE} >& {log}'
 
 rule aggregate_sbsmtf:
 	input:
@@ -189,7 +190,7 @@ rule bestrank_bestlambda_sbsmtf:
 	log:
 		OUTDIR + '/logs/bestrank_bestlambda_sbsmtf_{t}.log'
 	shell:
-		'src/bestrank_bestlambda_sbsmtf.sh {input} {output} {N_ITER_MAX} {BETA} >& {log}'
+		'src/bestrank_bestlambda_sbsmtf.sh {input} {output} {N_ITER_MAX} {BETA} {INPUT_SPARSE} >& {log}'
 
 rule aggregate_bestrank_bestlambda_sbsmtf:
 	input:
@@ -245,7 +246,7 @@ rule check_x_new:
 	log:
 		OUTDIR + '/logs/check_x_new_{x_new}.log'
 	shell:
-		'src/check_x_new.sh {wildcards.x_new} {input} {output} >& {log}'
+		'src/check_x_new.sh {wildcards.x_new} {input} {output} {X_NEW_SPARSE} >& {log}'
 
 rule sbmf_w_new:
 	input:
@@ -259,7 +260,7 @@ rule sbmf_w_new:
 	log:
 		OUTDIR + '/logs/sbmf_{l}_{t}.log'
 	shell:
-		'src/sbmf_w_new.sh {input} {output} {OUTDIR} {wildcards.l} {N_ITER_MAX} {BIN_W_NEW} {BETA} >& {log}'
+		'src/sbmf_w_new.sh {OUTDIR} {input} {output} {OUTDIR} {wildcards.l} {N_ITER_MAX} {BIN_W_NEW} {BETA} {X_NEW_SPARSE} >& {log}'
 
 rule aggregate_sbmf_w_new:
 	input:
@@ -305,22 +306,22 @@ rule predict_w_new:
 		OUTDIR + '/sbmf/bestlambda.txt',
 		OUTDIR + '/H.tsv'
 	output:
-		OUTDIR + '/{x_new}/W_new.tsv'
+		OUTDIR + '/{x_new}/W_new'
 	benchmark:
 		OUTDIR + '/benchmarks/predict_{x_new}.txt'
 	log:
 		OUTDIR + '/logs/predict_{x_new}.log'
 	shell:
-		'src/predict_w_new.sh {wildcards.x_new} {input} {output} {N_ITER_MAX} {BETA} > {log}'
+		'src/predict_w_new.sh {wildcards.x_new} {input} {output} {N_ITER_MAX} {BETA} {X_NEW_SPARSE} {W_NEW_SPARSE} > {log}'
 
 rule aggregate_w_new:
 	input:
-		expand(OUTDIR + '/{x_new}/W_new.tsv', x_new=X_NEWS)
+		expand(OUTDIR + '/{x_new}/W_new', x_new=X_NEWS)
 	output:
-		OUTDIR + '/W_new.tsv'
+		OUTDIR + '/W_new'
 	benchmark:
 		OUTDIR + '/benchmarks/aggregate_w_new.txt'
 	log:
 		OUTDIR + '/logs/aggregate_w_new.log'
 	shell:
-		'src/aggregate_w_new.sh {input} {output} > {log}'
+		'src/aggregate_w_new.sh {input} {output} {W_NEW_SPARSE} > {log}'

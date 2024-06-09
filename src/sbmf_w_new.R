@@ -2,21 +2,30 @@ source("src/Functions.R")
 
 args <- commandArgs(trailingOnly = TRUE)
 l <- length(args)
-infile1 <- args[1] # Only the first file is evaluated
-infile2 <- args[l-7]
-outfile1 <- args[l-6]
-outfile2 <- args[l-5]
-outdir <- args[l-4]
-Bin_U <- 10^as.numeric(args[l-3])
-num.iter <- as.numeric(args[l-2])
-bin_w <- as.logical(args[l-1])
-beta <- as.numeric(args[l])
+outdir <- args[1]
+# Only the first file is evaluated
+infile1 <- gsub(paste0(outdir, "/"), "",
+	gsub("/CHECK_X_NEW", "", args[2]))
+infile2 <- args[l-8]
+outfile1 <- args[l-7]
+outfile2 <- args[l-6]
+outdir <- args[l-5]
+Bin_U <- 10^as.numeric(args[l-4])
+num.iter <- as.numeric(args[l-3])
+bin_w <- as.logical(args[l-2])
+beta <- as.numeric(args[l-1])
+x_new_sparse <- as.logical(args[l])
+
 infile1 <- gsub("/CHECK_X_NEW", "",
 	gsub(paste0(outdir, "/"), "", infile1))
 
-if(bin_w){
+if((infile1 != "_") && bin_w){
 	# Loading
-	X_new <- as.matrix(read.table(infile1, header=FALSE))
+	if(x_new_sparse){
+		X_new <- readMM(infile1)
+	}else{
+		X_new <- as.matrix(read.table(infile1, header=FALSE))
+	}
 	initV <- as.matrix(read.table(infile2, header=FALSE))
 
 	# NMF with binary regularization

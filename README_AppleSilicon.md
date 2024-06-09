@@ -56,14 +56,17 @@ cd SBSMTFCV
 
 Next, perform `SBSMTFCV` by the `snakemake` command as follows.
 
-**Note: To check if the command is executable, set smaller parameters such as rank_min=2 rank_max=2 lambda_max=2 lambda_min=2 trials=2 n_iter_max=2.**
+**Note: To check if the command is executable, set smaller parameters such as rank_min=2 rank_max=3 lambda_min=9 lambda_max=10 trials=2 n_iter_max=2.**
 
 **Note that `--use-singularity` option does not work on M1/M2 Mac.**
 
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output rank_min=2 \
-rank_max=10 lambda_min=-10 lambda_max=10 trials=10 \
-n_iter_max=100 x_new_list="" bin_h=TRUE bin_w_new=FALSE \
+rank_max=10 lambda_min=1 lambda_max=10 trials=10 \
+n_iter_max=100 x_new_list="" \
+input_sparse=FALSE output_sparse=FALSE \
+x_new_sparse=FALSE w_new_sparse=FALSE \
+bin_h=TRUE bin_w_new=FALSE \
 beta=2 ratio=20 --resources mem_gb=10
 ```
 
@@ -80,6 +83,10 @@ The meanings of all the arguments are below.
 - `trials`: Number of random trials (e.g., 10, mandatory)
 - `n_iter_max`: Number of iterations (e.g., 100, mandatory)
 - `x_new_list`: X_new file list to predict U_new values (Default value is "", which means no prediction is performed, optional)
+- `input_sparse`: Whether the input data is formatted as Matrix Market <MM> (Default value is FALSE)
+- `output_sparse`: Whether the output datda is formatted as Matrix Market <MM> (Default value is FALSE)
+- `x_new_sparse`: Whether the X_new data is formatted as Matrix Market <MM> (Default value is FALSE)
+- `w_new_sparse`: Whether the W_new is formatted as Matrix Market <MM> (Default value is FALSE)
 - `bin_h`: Whether the binarization of H is perfomed (Default value is TRUE, otherwise FALSE, optional)
 - `bin_w_new`: Whether the binarization of W_new is perfomed (Default value is FALSE, otherwise TRUE, optional)
 - `beta`: Parameter for Beta-divergence (Default value is 2, optional)
@@ -91,7 +98,7 @@ The meanings of all the arguments are below.
 
 If the `docker` command is available, the following command can be performed without installing any tools.
 
-**Note: To check if the command is executable, set smaller parameters such as rank_min=2 rank_max=2 lambda_max=2 lambda_min=2 trials=2 n_iter_max=2.**
+**Note: To check if the command is executable, set smaller parameters such as rank_min=2 rank_max=3 lambda_min=9 lambda_max=10 trials=2 n_iter_max=2.**
 
 **Note that `--platform linux/amd64` option is required on M1/M2 Mac.**
 
@@ -100,8 +107,11 @@ docker run --platform Linux/amd64 \
 --rm -v $(pwd):/work ghcr.io/chiba-ai-med/sbsmtfcv:main \
 -i /work/data/testdata.tsv -o /work/output \
 --cores=4 --rank_min=2 --rank_max=10 \
---lambda_min=-10 --lambda_max=10 --trials=10 \
---n_iter_max=100 --x_new_list="" --bin_h=TRUE --bin_w_new=FALSE \
+--lambda_min=1 --lambda_max=10 --trials=10 \
+--n_iter_max=100 --x_new_list="" \
+--input_sparse=FALSE --output_sparse=FALSE \
+--x_new_sparse=FALSE --w_new_sparse=FALSE \
+--bin_h=TRUE --bin_w_new=FALSE \
 --beta=2 --ratio=20 --memgb=10
 ```
 

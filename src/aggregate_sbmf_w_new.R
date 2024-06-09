@@ -19,8 +19,13 @@ if(bin_w){
 	for(i in seq_along(lambda_index)){
 		for(j in trial_index){
 			filename = paste0(outdir, "/sbmf/", lambda_index[i], "/", j, "_error.txt")
-			out[count, 3] <- read.table(filename)
-			count <- count + 1
+			if(file.info(filename)$size != 0){
+				out[count, 3] <- read.table(filename)
+				count <- count + 1
+			}else{
+				file.create(outfile)
+				q("no")
+			}
 		}
 	}
 

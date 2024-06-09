@@ -8,9 +8,14 @@ J <- as.numeric(args[4])
 num.iter <- as.numeric(args[5])
 beta <- as.numeric(args[6])
 ratio <- as.numeric(args[7])
+input_sparse <- as.logical(args[8])
 
 # Loading
-A <- as.matrix(read.table(infile, header=FALSE))
+if(input_sparse){
+	A <- 1.0 * as.matrix(readMM(infile))
+}else{
+	A <- as.matrix(read.table(infile, header=FALSE))
+}
 colnames(A) <- NULL
 
 # Mask Matrix
