@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.2.1...v1.3.0) (2024-06-09)
+
+
+### Features
+
+* Sparse Format ([2898b02](https://github.com/chiba-ai-med/SBSMTFCV/commit/2898b0257c66bc1aec01a5629d815ccbd523f862))
+
 ## [1.2.1](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.2.0...v1.2.1) (2024-05-24)
 
 
