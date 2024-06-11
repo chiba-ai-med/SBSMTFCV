@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.1](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.4.0...v1.4.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* DAG ([3976cbd](https://github.com/chiba-ai-med/SBSMTFCV/commit/3976cbd4f8f2ddb1d43ae9e87dfc4e4dfee5734c))
+* Debug Dockerfile ([c799ece](https://github.com/chiba-ai-med/SBSMTFCV/commit/c799ecee96053d3810357a9e9aca12fb4afbb1e4))
+* Debug Dockerfile ([bf66b4f](https://github.com/chiba-ai-med/SBSMTFCV/commit/bf66b4f58656ab1b379c19ec7dbff53ba2864bc2))
+* Debug Dockerfile ([8579ce9](https://github.com/chiba-ai-med/SBSMTFCV/commit/8579ce9b99983dc315b52715409a7ffa3b6de3c8))
+
 ## [1.4.0](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.3.0...v1.4.0) (2024-06-11)
 
 
