@@ -61,7 +61,7 @@ LAMBDA_MIN=1
 LAMBDA_MAX=10
 TRIALS=10
 N_ITER_MAX=100
-X_NEW_LIST=""
+X_NEW_LIST="None"
 INPUT_SPARSE="FALSE"
 OUTPUT_SPARSE="FALSE"
 X_NEW_SPARSE="FALSE"
@@ -71,7 +71,7 @@ BIN_W_NEW="FALSE"
 BETA=2
 RATIO=20
 MEMGB=10
-VERSION="v1.4.0"
+VERSION="v1.4.1"
 
 # Command Argument Parsing
 while getopts i:o:c:l:u:b:d:t:e:x:s:f:r:g:n:w:p:a:m:h-:v- opt; do
