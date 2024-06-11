@@ -17,7 +17,7 @@ OUTFILE=("${args[len-2]}")
 
 if [ ${args[len-1]} = TRUE ]; then
 	# Sparse
-	Rscript src/aggregate_w_new.R ${INFILES[@]} $OUTFILE
+	python src/aggregate_w_new.py ${INFILES[@]} $OUTFILE
 else
 	# Dense
 	cat ${INFILES[@]} > $OUTFILE

@@ -13,29 +13,97 @@ INPUT = config["input"]
 OUTDIR = config["outdir"]
 
 # Optional Arguments
-RANK_MIN = int(config["rank_min"])
-RANK_MAX = int(config["rank_max"])
+RANK_MIN = config.get("rank_min", "None")
+if RANK_MIN == "None":
+	RANK_MIN = 2
+else:
+	RANK_MIN = int(RANK_MIN)
+RANK_MAX = config.get("rank_max", "None")
+if RANK_MAX == "None":
+	RANK_MAX = 10
+else:
+	RANK_MAX = int(RANK_MAX)
 RANK_INDEX = [str(x) for x in list(range(RANK_MIN, RANK_MAX + 1))]
-LAMBDA_MIN = int(config["lambda_min"])
-LAMBDA_MAX = int(config["lambda_max"])
+
+LAMBDA_MIN = config.get("lambda_min", "None")
+if LAMBDA_MIN == "None":
+	LAMBDA_MIN = 1
+else:
+	LAMBDA_MIN = int(LAMBDA_MIN)
+LAMBDA_MAX = config.get("lambda_max", "None")
+if LAMBDA_MAX == "None":
+	LAMBDA_MAX = 10
+else:
+	LAMBDA_MAX = int(LAMBDA_MAX)
 LAMBDA_INDEX = [str(x) for x in list(range(LAMBDA_MIN, LAMBDA_MAX + 1))]
-TRIALS = int(config["trials"])
+
+TRIALS = config.get("trials", "None")
+if TRIALS == "None":
+	TRIALS = 10
+else:
+	TRIALS = int(TRIALS)
 TRIAL_INDEX = [str(x) for x in list(range(1, TRIALS+1))]
-N_ITER_MAX = int(config["n_iter_max"])
-X_NEW_LIST = str(config["x_new_list"])
+
+N_ITER_MAX = config.get("n_iter_max", "None")
+if N_ITER_MAX == "None":
+	N_ITER_MAX = 100
+else:
+	N_ITER_MAX = int(N_ITER_MAX)
+
+X_NEW_LIST = config.get("x_new_list", "None")
 if X_NEW_LIST == "None":
 	X_NEWS = "_"
 else:
+	X_NEW_LIST = str(X_NEW_LIST)
 	X_NEWS = pd.read_table(X_NEW_LIST, header=None)[0]
 
-INPUT_SPARSE = str(config["input_sparse"])
-OUTPUT_SPARSE = str(config["output_sparse"])
-X_NEW_SPARSE = str(config["x_new_sparse"])
-W_NEW_SPARSE = str(config["w_new_sparse"])
-BIN_H = str(config["bin_h"])
-BIN_W_NEW = str(config["bin_w_new"])
-BETA = int(config["beta"])
-RATIO = int(config["ratio"])
+INPUT_SPARSE = config.get("input_sparse", "None")
+if INPUT_SPARSE == "None":
+	INPUT_SPARSE = "FALSE"
+else:
+	INPUT_SPARSE = str(INPUT_SPARSE)
+
+OUTPUT_SPARSE = config.get("output_sparse", "None")
+if OUTPUT_SPARSE == "None":
+	OUTPUT_SPARSE = "FALSE"
+else:
+	OUTPUT_SPARSE = str(OUTPUT_SPARSE)
+
+X_NEW_SPARSE = config.get("x_new_sparse", "None")
+if X_NEW_SPARSE == "None":
+	X_NEW_SPARSE = "FALSE"
+else:
+	X_NEW_SPARSE = str(X_NEW_SPARSE)
+
+W_NEW_SPARSE = config.get("w_new_sparse", "None")
+if W_NEW_SPARSE == "None":
+	W_NEW_SPARSE = "FALSE"
+else:
+	W_NEW_SPARSE = str(W_NEW_SPARSE)
+
+BIN_H = config.get("bin_h", "None")
+if BIN_H == "None":
+	BIN_H = "TRUE"
+else:
+	BIN_H = str(BIN_H)
+
+BIN_W_NEW = config.get("bin_w_new", "None")
+if BIN_W_NEW == "None":
+	BIN_W_NEW = "FALSE"
+else:
+	BIN_W_NEW = str(BIN_W_NEW)
+
+BETA = config.get("beta", "None")
+if BETA == "None":
+	BETA = 2
+else:
+	BETA = int(BETA)
+
+RATIO = config.get("ratio", "None")
+if RATIO == "None":
+	RATIO = 20
+else:
+	RATIO = int(RATIO)
 
 # Docker Container
 container: 'docker://koki/sbsmtfcv_component:20240604'
