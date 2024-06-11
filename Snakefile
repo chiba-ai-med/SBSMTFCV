@@ -50,7 +50,9 @@ if N_ITER_MAX == "None":
 else:
 	N_ITER_MAX = int(N_ITER_MAX)
 
+print(config["x_new_list"])
 X_NEW_LIST = config.get("x_new_list", "None")
+print(X_NEW_LIST)
 if X_NEW_LIST == "None":
 	X_NEWS = "_"
 else:
