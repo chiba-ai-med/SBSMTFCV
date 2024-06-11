@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.3.0...v1.4.0) (2024-06-11)
+
+
+### Features
+
+* Optional Parameter/Aggregate (W_new) by Python ([42f9b1f](https://github.com/chiba-ai-med/SBSMTFCV/commit/42f9b1f2361151b2b61eb7221d3c62bf5732b207))
+
 ## [1.3.0](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.2.1...v1.3.0) (2024-06-09)
 
 
