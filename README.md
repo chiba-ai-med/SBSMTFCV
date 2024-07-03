@@ -1,7 +1,7 @@
 # SBSMTFCV
 
 [![Snakemake](https://img.shields.io/badge/snakemake-≥7.30.1-brightgreen.svg)](https://snakemake.github.io)
-[![DOI](https://zenodo.org/badge/659959126.svg)](https://zenodo.org/doi/10.5281/zenodo.8189643)
+[![DOI](https://zenodo.org/badge/799540046.svg)](https://zenodo.org/doi/10.5281/zenodo.11184839)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/build_test_push.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/dockerrun1.yml/badge.svg)
 ![GitHub Actions](https://github.com/chiba-ai-med/SBSMTFCV/actions/workflows/dockerrun2.yml/badge.svg)
@@ -60,7 +60,7 @@ Next, perform `SBSMTFCV` by the `snakemake` command as follows.
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output rank_min=2 \
 rank_max=10 lambda_min=1 lambda_max=10 trials=10 \
-n_iter_max=100 x_new_list="" \
+n_iter_max=100 x_new_list="None" \
 input_sparse=FALSE output_sparse=FALSE \
 x_new_sparse=FALSE w_new_sparse=FALSE \
 bin_h=TRUE bin_w_new=FALSE \
@@ -101,7 +101,7 @@ If the `GridEngine` (`qsub` command) is available in your environment, you can a
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output rank_min=2 \
 rank_max=10 lambda_min=1 lambda_max=10 trials=10 \
-n_iter_max=100 x_new_list="" \
+n_iter_max=100 x_new_list="None" \
 input_sparse=FALSE output_sparse=FALSE \
 x_new_sparse=FALSE w_new_sparse=FALSE \
 bin_h=TRUE bin_w_new=FALSE \
@@ -118,7 +118,7 @@ Likewise, if the `Slurm` (`sbatch` command) is available in your environment, yo
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output rank_min=2 \
 rank_max=10 lambda_min=1 lambda_max=10 trials=10 \
-n_iter_max=100 x_new_list="" \
+n_iter_max=100 x_new_list="None" \
 input_sparse=FALSE output_sparse=FALSE \
 x_new_sparse=FALSE w_new_sparse=FALSE \
 bin_h=TRUE bin_w_new=FALSE \
@@ -137,7 +137,7 @@ docker run --rm -v $(pwd):/work ghcr.io/chiba-ai-med/sbsmtfcv:main \
 -i /work/data/testdata.tsv -o /work/output \
 --cores=4 --rank_min=2 --rank_max=10 \
 --lambda_min=1 --lambda_max=10 --trials=10 \
---n_iter_max=100 --x_new_list="" \
+--n_iter_max=100 --x_new_list="None" \
 --input_sparse=FALSE --output_sparse=FALSE \
 --x_new_sparse=FALSE --w_new_sparse=FALSE \
 --bin_h=TRUE ––bin_w_new=FALSE \

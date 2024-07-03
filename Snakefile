@@ -304,21 +304,9 @@ rule bindata_for_landscaper:
 #############################################################
 # Prediction of W_new from X_new file list
 #############################################################
-rule check_x_new:
-	input:
-		OUTDIR + '/H.tsv'
-	output:
-		OUTDIR + '/{x_new}/CHECK_X_NEW'
-	benchmark:
-		OUTDIR + '/benchmarks/check_x_new_{x_new}.txt'
-	log:
-		OUTDIR + '/logs/check_x_new_{x_new}.log'
-	shell:
-		'src/check_x_new.sh {wildcards.x_new} {input} {output} {X_NEW_SPARSE} >& {log}'
-
 rule sbmf_w_new:
 	input:
-		expand(OUTDIR + '/{x_new}/CHECK_X_NEW', x_new=X_NEWS),
+		X_NEWS,
 		OUTDIR + '/H.tsv'
 	output:
 		OUTDIR + '/sbmf/{l}/{t}_error.txt',
@@ -370,7 +358,6 @@ rule bestlambda_w_new:
 
 rule predict_w_new:
 	input:
-		OUTDIR + '/{x_new}/CHECK_X_NEW',
 		OUTDIR + '/sbmf/bestlambda.txt',
 		OUTDIR + '/H.tsv'
 	output:

@@ -39,6 +39,7 @@
 .cache
 .fontconfig
 .snakemake
+data
 data/IsingGen
 data/seurat.RData
 data/seurat.tsv

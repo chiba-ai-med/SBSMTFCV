@@ -63,7 +63,7 @@ Next, perform `SBSMTFCV` by the `snakemake` command as follows.
 ```bash
 snakemake -j 4 --config input=data/testdata.tsv outdir=output rank_min=2 \
 rank_max=10 lambda_min=1 lambda_max=10 trials=10 \
-n_iter_max=100 x_new_list="" \
+n_iter_max=100 x_new_list="None" \
 input_sparse=FALSE output_sparse=FALSE \
 x_new_sparse=FALSE w_new_sparse=FALSE \
 bin_h=TRUE bin_w_new=FALSE \
@@ -109,7 +109,7 @@ docker run --platform Linux/amd64 \
 -i /work/data/testdata.tsv -o /work/output \
 --cores=4 --rank_min=2 --rank_max=10 \
 --lambda_min=1 --lambda_max=10 --trials=10 \
---n_iter_max=100 --x_new_list="" \
+--n_iter_max=100 --x_new_list="None" \
 --input_sparse=FALSE --output_sparse=FALSE \
 --x_new_sparse=FALSE --w_new_sparse=FALSE \
 --bin_h=TRUE --bin_w_new=FALSE \
