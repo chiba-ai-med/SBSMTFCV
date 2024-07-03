@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.4.1...v1.5.0) (2024-07-03)
+
+
+### Features
+
+* predict_w_new/sbmf_w_new ([8f01f6c](https://github.com/chiba-ai-med/SBSMTFCV/commit/8f01f6cdbbea9d28d7a3a662b250c40896c7c0cf))
+
 ## [1.4.1](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.4.0...v1.4.1) (2024-06-11)
 
 
