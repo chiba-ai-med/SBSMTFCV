@@ -71,7 +71,7 @@ BIN_W_NEW="FALSE"
 BETA=2
 RATIO=20
 MEMGB=10
-VERSION="v1.4.2"
+VERSION="v1.4.3"
 
 # Command Argument Parsing
 while getopts i:o:c:l:u:b:d:t:e:x:s:f:r:g:n:w:p:a:m:h-:v- opt; do
