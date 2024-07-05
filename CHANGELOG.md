@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.4.2...v1.4.3) (2024-07-05)
+
+
+### Bug Fixes
+
+* Revert to v1.4.2 ([6c0ae5c](https://github.com/chiba-ai-med/SBSMTFCV/commit/6c0ae5c358a1faa2c23ae37fffe4f7f393d795dc))
+
 ## [1.4.2](https://github.com/chiba-ai-med/SBSMTFCV/compare/v1.4.1...v1.4.2) (2024-07-03)
 
 
